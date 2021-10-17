@@ -1,0 +1,14 @@
+{
+  "name": "aula2-serverless",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/fallying/pixsls.git",
+  "author": "Jonas Brito <jonasexplore@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-offline": "^8.2.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
