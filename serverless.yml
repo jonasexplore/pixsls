@@ -1,4 +1,4 @@
-service: aula2-serverless
+service: pixsls
 
 frameworkVersion: "2"
 
