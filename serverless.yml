@@ -4,11 +4,49 @@ frameworkVersion: "2"
 
 plugins:
   - serverless-offline
+  - serverless-dynamodb-local
 
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  stage: dev
+  region: us-east-1
+
+  environment:
+    COSTUMER_TABLE: "costumers-${opt:stage, self:provider.stage}"
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "*"
+
+custom:
+  dynamodb:
+    start:
+      migrate: true
+    stages:
+      - dev
+
+resources:
+  Resources:
+    costumersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.COSTUMER_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 functions:
   createCostumer:
