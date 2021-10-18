@@ -1,8 +1,16 @@
-const database = require("../../../infra/database/index");
+const { ok } = require("../../../infra/http/adapters/HttpResponseAdapter");
+const costumerRepository = require("../../../infra/repositories/CostumerRepository");
 
 module.exports.execute = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(database.costumers, null, 2),
-  };
+  let params = event?.queryStringParameters;
+
+  if (params?.id) {
+    return ok(await costumerRepository.listById(params.id));
+  }
+
+  if (params?.name) {
+    return ok(await costumerRepository.listByName(params.name));
+  }
+
+  return ok(await costumerRepository.list());
 };
