@@ -1,13 +1,13 @@
-const { v4: uuid } = require("uuid");
+import { v4 as uuid } from "uuid";
 
 class Costumer {
-  id;
-  name;
-  birthdate;
-  created_at;
-  updated_at;
+  id: string;
+  name: string;
+  birthdate: string;
+  created_at: string;
+  updated_at: string;
 
-  constructor(name, birthdate) {
+  constructor(name: string, birthdate: string) {
     if (!this.id) {
       this.id = uuid();
     }
@@ -22,4 +22,4 @@ class Costumer {
   }
 }
 
-module.exports = Costumer;
+export { Costumer };
