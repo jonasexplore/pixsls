@@ -3,8 +3,9 @@ service: pixsls
 frameworkVersion: "2"
 
 plugins:
-  - serverless-offline
   - serverless-dynamodb-local
+  - serverless-plugin-typescript
+  - serverless-offline
 
 provider:
   name: aws
